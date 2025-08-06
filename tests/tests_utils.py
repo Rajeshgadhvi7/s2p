@@ -5,15 +5,21 @@ import os
 import s2p
 
 
-def data_path(p):
-    """
-    Build an absolute data path from an input test datafile.
+def data_path(p: str) -> str:
+    """Build an absolute path to a test data file.
+
+    The base directory can be overridden by the ``S2P_DATA_PATH``
+    environment variable.  This makes it possible to run the tests on
+    alternative datasets without modifying the repository structure.
 
     Args:
-        p (str): path to the input test data
+        p: path to the input test data relative to the dataset root
 
     Returns:
         str: absolute path to that data file
     """
-    here = os.path.abspath(os.path.dirname(__file__))
-    return os.path.join(here, 'data', p)
+    base_dir = os.environ.get("S2P_DATA_PATH")
+    if base_dir is None:
+        here = os.path.abspath(os.path.dirname(__file__))
+        base_dir = os.path.join(here, "data")
+    return os.path.join(base_dir, p)
