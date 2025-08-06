@@ -89,6 +89,11 @@ You can test if S2P is correctly working using:
 
     make test
 
+By default the test suite uses the example files located under
+``tests/data``.  To run the tests with another dataset, set the
+environment variable ``S2P_DATA_PATH`` to the directory containing the
+alternative input files.
+
 If some libraries needed by `s2p` (such as `libfftw3`) are installed in a custom location,
 for example `/usr/joe/local`, then the compilation and tests will fail with exit status 127
 or mentioning not being able to load shared  libaries.  You can help the compiler to find
